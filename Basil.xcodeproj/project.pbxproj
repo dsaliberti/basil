@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9F064F252E09CE7B003610B0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9F064F242E09CE7B003610B0 /* README.md */; };
+		9FBBB49D2E0AD8A100D2C0C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9FBBB49C2E0AD8A100D2C0C5 /* README.md */; };
+		9FBBB4AB2E0ADC8B00D2C0C5 /* SharedModels in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBBB4AA2E0ADC8B00D2C0C5 /* SharedModels */; };
+		9FBBB4B42E0AECB900D2C0C5 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBBB4B32E0AECB900D2C0C5 /* Core */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,7 +25,7 @@
 /* Begin PBXFileReference section */
 		9F064EFA2E09CE46003610B0 /* Basil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Basil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F064F072E09CE47003610B0 /* BasilTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasilTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F064F242E09CE7B003610B0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = SOURCE_ROOT; };
+		9FBBB49C2E0AD8A100D2C0C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -31,6 +33,14 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+			);
+			target = 9F064EF92E09CE46003610B0 /* Basil */;
+		};
+		9FBBB4A22E0ADB6300D2C0C5 /* Exceptions for "packages" folder in "Basil" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Core,
+				SharedModels,
 			);
 			target = 9F064EF92E09CE46003610B0 /* Basil */;
 		};
@@ -50,6 +60,14 @@
 			path = BasilTests;
 			sourceTree = "<group>";
 		};
+		9FBBB4A12E0ADB6300D2C0C5 /* packages */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9FBBB4A22E0ADB6300D2C0C5 /* Exceptions for "packages" folder in "Basil" target */,
+			);
+			path = packages;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FBBB4AB2E0ADC8B00D2C0C5 /* SharedModels in Frameworks */,
+				9FBBB4B42E0AECB900D2C0C5 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,9 +93,11 @@
 		9F064EF12E09CE46003610B0 = {
 			isa = PBXGroup;
 			children = (
-				9F064F242E09CE7B003610B0 /* README.md */,
+				9FBBB4A12E0ADB6300D2C0C5 /* packages */,
+				9FBBB49C2E0AD8A100D2C0C5 /* README.md */,
 				9F064EFC2E09CE46003610B0 /* Basil */,
 				9F064F0A2E09CE47003610B0 /* BasilTests */,
+				9FBBB4A92E0ADC8B00D2C0C5 /* Frameworks */,
 				9F064EFB2E09CE46003610B0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,6 +109,13 @@
 				9F064F072E09CE47003610B0 /* BasilTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9FBBB4A92E0ADC8B00D2C0C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,9 +135,12 @@
 			);
 			fileSystemSynchronizedGroups = (
 				9F064EFC2E09CE46003610B0 /* Basil */,
+				9FBBB4A12E0ADB6300D2C0C5 /* packages */,
 			);
 			name = Basil;
 			packageProductDependencies = (
+				9FBBB4AA2E0ADC8B00D2C0C5 /* SharedModels */,
+				9FBBB4B32E0AECB900D2C0C5 /* Core */,
 			);
 			productName = Basil;
 			productReference = 9F064EFA2E09CE46003610B0 /* Basil.app */;
@@ -181,7 +213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F064F252E09CE7B003610B0 /* README.md in Resources */,
+				9FBBB49D2E0AD8A100D2C0C5 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +500,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9FBBB4AA2E0ADC8B00D2C0C5 /* SharedModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SharedModels;
+		};
+		9FBBB4B32E0AECB900D2C0C5 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9F064EF22E09CE46003610B0 /* Project object */;
 }
