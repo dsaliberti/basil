@@ -19,6 +19,10 @@ let package = Package(
       url: "https://github.com/pointfreeco/swift-composable-architecture",
       exact: "1.19.1"
     ),
+    .package(
+      url: "https://github.com/onevcat/Kingfisher",
+      exact: "8.3.3"
+    ),
     .package(path: "../SharedModels")
   ],
   targets: [
@@ -28,6 +32,10 @@ let package = Package(
         .product(
           name: "ComposableArchitecture",
           package: "swift-composable-architecture"
+        ),
+        .product(
+          name: "Kingfisher",
+          package: "Kingfisher"
         ),
         "SharedModels"
       ]
