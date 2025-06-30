@@ -14,6 +14,7 @@ extension RestAPIClient: DependencyKey {
         do {
           let (data, _) = try await URLSession.shared.data(for: request)
           let decoder = JSONDecoder()
+          
           let recipes = try decoder.decode(
             Recipes.self,
             from: data

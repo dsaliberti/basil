@@ -19,12 +19,14 @@ extension RestAPIClient: TestDependencyKey {
     )
   }
   
+  public enum RestAPIError: Error { case failedToFetch }
+  
   public static var previewValue: RestAPIClient {
+    
     Self(
-      fetchAllRecipes: { .mock }
+      fetchAllRecipes: { throw RestAPIError.failedToFetch }
     )
   }
-  
 }
 
 extension DependencyValues {
@@ -59,7 +61,7 @@ extension Array where Element == Recipe {
         prepTimeMinutes: 20,
         cookTimeMinutes: 15,
         servings: 4,
-        difficulty: "Easy",
+        difficulty: .easy,
         cuisine: "Italian",
         caloriesPerServing: 300,
         tags: ["Pizza", "Italian"],

@@ -8,7 +8,7 @@ public struct Recipe: Identifiable, Decodable, Sendable, Equatable {
   public let prepTimeMinutes: Int
   public let cookTimeMinutes: Int
   public let servings: Int
-  public let difficulty: String
+  public let difficulty: Difficulty
   public let cuisine: String
   public let caloriesPerServing: Int
   public let tags: [String]
@@ -27,7 +27,7 @@ public struct Recipe: Identifiable, Decodable, Sendable, Equatable {
     prepTimeMinutes: Int,
     cookTimeMinutes: Int,
     servings: Int,
-    difficulty: String,
+    difficulty: Difficulty,
     cuisine: String,
     caloriesPerServing: Int,
     tags: [String],
