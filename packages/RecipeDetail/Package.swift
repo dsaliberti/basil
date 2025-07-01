@@ -4,27 +4,26 @@
 import PackageDescription
 
 let package = Package(
-  name: "RecipeList",
+  name: "RecipeDetail",
   platforms: [
     .iOS(.v18)
   ],
   products: [
     .library(
-      name: "RecipeList",
-      targets: ["RecipeList"]
+      name: "RecipeDetail",
+      targets: ["RecipeDetail"]
     ),
   ],
   dependencies: [
-    .package(path: "../Core"),
-    .package(path: "../RecipeDetail")
+    .package(path: "../Core")
   ],
   targets: [
     .target(
-      name: "RecipeList",
+      name: "RecipeDetail",
       dependencies: [
-        "Core",
-        "RecipeDetail"
+        "Core"
       ]
     )
   ]
 )
+

@@ -1,4 +1,5 @@
 import SharedModels
+import RecipeDetail
 import ComposableArchitecture
 
 @Reducer
@@ -11,6 +12,7 @@ public struct RecipeListFeature: Sendable {
   @Reducer(state: .equatable)
   public enum Destination {
     case filterOptions(FilterOptionsFeature)
+    case detail(RecipeDetailFeature)
   }
   
   @ObservableState
@@ -48,6 +50,7 @@ public struct RecipeListFeature: Sendable {
     case didTapFilter
     case destination(PresentationAction<Destination.Action>)
     case didPullToRefresh
+    case didTapRow(Recipe)
   }
   
   public var body: some Reducer<State, Action> {
@@ -64,9 +67,6 @@ public struct RecipeListFeature: Sendable {
       return fetchRecipes()
       
     case let .recipesUdpated(recipes):
-      
-      let ratings = Set(recipes.map(\.rating))
-      
       state.recipes = recipes
       return .none
       
@@ -85,6 +85,11 @@ public struct RecipeListFeature: Sendable {
       
     case .destination:
       return .none
+      
+    case let .didTapRow(recipe):
+      state.destination = .detail(RecipeDetailFeature.State(recipe: recipe))
+      return .none
+      
     }
   }
   
