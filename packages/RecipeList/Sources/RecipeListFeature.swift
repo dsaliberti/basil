@@ -38,8 +38,12 @@ public struct RecipeListFeature: Sendable {
         }
     }
     
-    public init(recipes: [Recipe] = []) {
+    public init(
+      recipes: [Recipe] = [],
+      destination: Destination.State? = nil
+    ) {
       self.recipes = recipes
+      self.destination = destination
     }
   }
   

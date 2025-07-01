@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "D96F69E5-8BA4-4BB8-A192-700ADE7849D1",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "RecipeListTests",
+        "name" : "RecipeListTests"
+      }
+    }
+  ],
+  "version" : 1
+}

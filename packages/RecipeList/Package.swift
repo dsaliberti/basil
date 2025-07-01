@@ -25,6 +25,12 @@ let package = Package(
         "Core",
         "RecipeDetail"
       ]
-    )
+    ),
+    .testTarget(
+      name: "RecipeListTests",
+      dependencies: [
+        "RecipeList"
+      ]
+    ),
   ]
 )

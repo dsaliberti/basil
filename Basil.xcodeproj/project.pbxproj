@@ -13,19 +13,8 @@
 		9FBBB4B72E0C46FA00D2C0C5 /* RecipeList in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBBB4B62E0C46FA00D2C0C5 /* RecipeList */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		9F064F082E09CE47003610B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9F064EF22E09CE46003610B0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9F064EF92E09CE46003610B0;
-			remoteInfo = Basil;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		9F064EFA2E09CE46003610B0 /* Basil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Basil.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F064F072E09CE47003610B0 /* BasilTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasilTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBBB49C2E0AD8A100D2C0C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,11 +47,6 @@
 			path = Basil;
 			sourceTree = "<group>";
 		};
-		9F064F0A2E09CE47003610B0 /* BasilTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = BasilTests;
-			sourceTree = "<group>";
-		};
 		9FBBB4A12E0ADB6300D2C0C5 /* packages */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -84,13 +68,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9F064F042E09CE47003610B0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -100,7 +77,6 @@
 				9FBBB4A12E0ADB6300D2C0C5 /* packages */,
 				9FBBB49C2E0AD8A100D2C0C5 /* README.md */,
 				9F064EFC2E09CE46003610B0 /* Basil */,
-				9F064F0A2E09CE47003610B0 /* BasilTests */,
 				9FBBB4A92E0ADC8B00D2C0C5 /* Frameworks */,
 				9F064EFB2E09CE46003610B0 /* Products */,
 			);
@@ -110,7 +86,6 @@
 			isa = PBXGroup;
 			children = (
 				9F064EFA2E09CE46003610B0 /* Basil.app */,
-				9F064F072E09CE47003610B0 /* BasilTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,29 +126,6 @@
 			productReference = 9F064EFA2E09CE46003610B0 /* Basil.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9F064F062E09CE47003610B0 /* BasilTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9F064F1E2E09CE47003610B0 /* Build configuration list for PBXNativeTarget "BasilTests" */;
-			buildPhases = (
-				9F064F032E09CE47003610B0 /* Sources */,
-				9F064F042E09CE47003610B0 /* Frameworks */,
-				9F064F052E09CE47003610B0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9F064F092E09CE47003610B0 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				9F064F0A2E09CE47003610B0 /* BasilTests */,
-			);
-			name = BasilTests;
-			packageProductDependencies = (
-			);
-			productName = BasilTests;
-			productReference = 9F064F072E09CE47003610B0 /* BasilTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -186,10 +138,6 @@
 				TargetAttributes = {
 					9F064EF92E09CE46003610B0 = {
 						CreatedOnToolsVersion = 16.3;
-					};
-					9F064F062E09CE47003610B0 = {
-						CreatedOnToolsVersion = 16.3;
-						TestTargetID = 9F064EF92E09CE46003610B0;
 					};
 				};
 			};
@@ -208,7 +156,6 @@
 			projectRoot = "";
 			targets = (
 				9F064EF92E09CE46003610B0 /* Basil */,
-				9F064F062E09CE47003610B0 /* BasilTests */,
 			);
 		};
 /* End PBXProject section */
@@ -222,13 +169,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9F064F052E09CE47003610B0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -239,22 +179,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9F064F032E09CE47003610B0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		9F064F092E09CE47003610B0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9F064EF92E09CE46003610B0 /* Basil */;
-			targetProxy = 9F064F082E09CE47003610B0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9F064F192E09CE47003610B0 /* Debug */ = {
@@ -436,44 +361,6 @@
 			};
 			name = Release;
 		};
-		9F064F1F2E09CE47003610B0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4NT7KZ3C7R;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dsaliberti.BasilTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Basil.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Basil";
-			};
-			name = Debug;
-		};
-		9F064F202E09CE47003610B0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4NT7KZ3C7R;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dsaliberti.BasilTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Basil.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Basil";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -491,15 +378,6 @@
 			buildConfigurations = (
 				9F064F1C2E09CE47003610B0 /* Debug */,
 				9F064F1D2E09CE47003610B0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9F064F1E2E09CE47003610B0 /* Build configuration list for PBXNativeTarget "BasilTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9F064F1F2E09CE47003610B0 /* Debug */,
-				9F064F202E09CE47003610B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

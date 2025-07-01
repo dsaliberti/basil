@@ -2,8 +2,8 @@ import SharedModels
 import ComposableArchitecture
 
 public struct FilterOptions: Sendable, Equatable {
-  var difficulty: Difficulty = .all
-  var rating: Rating = .all
+  public var difficulty: Difficulty = .all
+  public var rating: Rating = .all
 }
 
 @Reducer
@@ -61,9 +61,6 @@ public struct FilterOptionsFeature: Sendable {
     case .didTapConfirm:
       state.$filters.withLock {
         $0.difficulty = state.selectedDifficulty
-      }
-      
-      state.$filters.withLock {
         $0.rating = state.selectedRating
       }
       
