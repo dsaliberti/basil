@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9FBBB49D2E0AD8A100D2C0C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9FBBB49C2E0AD8A100D2C0C5 /* README.md */; };
-		9FBBB4AB2E0ADC8B00D2C0C5 /* SharedModels in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBBB4AA2E0ADC8B00D2C0C5 /* SharedModels */; };
-		9FBBB4B42E0AECB900D2C0C5 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBBB4B32E0AECB900D2C0C5 /* Core */; };
 		9FBBB4B72E0C46FA00D2C0C5 /* RecipeList in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBBB4B62E0C46FA00D2C0C5 /* RecipeList */; };
 /* End PBXBuildFile section */
 
@@ -63,8 +61,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FBBB4B72E0C46FA00D2C0C5 /* RecipeList in Frameworks */,
-				9FBBB4AB2E0ADC8B00D2C0C5 /* SharedModels in Frameworks */,
-				9FBBB4B42E0AECB900D2C0C5 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,8 +114,6 @@
 			);
 			name = Basil;
 			packageProductDependencies = (
-				9FBBB4AA2E0ADC8B00D2C0C5 /* SharedModels */,
-				9FBBB4B32E0AECB900D2C0C5 /* Core */,
 				9FBBB4B62E0C46FA00D2C0C5 /* RecipeList */,
 			);
 			productName = Basil;
@@ -385,14 +379,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9FBBB4AA2E0ADC8B00D2C0C5 /* SharedModels */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SharedModels;
-		};
-		9FBBB4B32E0AECB900D2C0C5 /* Core */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Core;
-		};
 		9FBBB4B62E0C46FA00D2C0C5 /* RecipeList */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RecipeList;
