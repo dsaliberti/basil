@@ -23,7 +23,16 @@ public struct RecipeListFeature: Sendable {
     
     var recipes: [Recipe] = []
     
-    var errorMessage: String? = nil
+    var status: Status = .initial
+    
+    public enum Status: Equatable {
+      case initial
+      case loading
+      case loaded
+      case failure(String)
+      case empty(String)
+      case emptyByFilters(String)
+    }
     
     @Presents var destination: Destination.State?
     
@@ -40,9 +49,11 @@ public struct RecipeListFeature: Sendable {
     
     public init(
       recipes: [Recipe] = [],
+      status: Status = .initial,
       destination: Destination.State? = nil
     ) {
       self.recipes = recipes
+      self.status = status
       self.destination = destination
     }
   }
@@ -55,6 +66,7 @@ public struct RecipeListFeature: Sendable {
     case destination(PresentationAction<Destination.Action>)
     case didPullToRefresh
     case didTapRow(Recipe)
+    case didTapClearFilters
   }
   
   public var body: some Reducer<State, Action> {
@@ -65,17 +77,19 @@ public struct RecipeListFeature: Sendable {
   func core(state: inout State, action: Action) -> Effect<Action> {
     switch action {
     case .task:
-      return fetchRecipes()
+      guard state.status == .initial else { return .none }
+      
+      return fetchRecipes(state: &state)
       
     case .didPullToRefresh:
-      return fetchRecipes()
+      return fetchRecipes(state: &state)
       
     case let .recipesUdpated(recipes):
       state.recipes = recipes
-      return .none
+      return updateStatus(state: &state)
       
     case .recipesLoadFailed:
-      state.errorMessage = "Failed to load recipes.\nPlease try again later."
+      state.status = .failure("Failed to load recipes.\nPlease try again later.")
       return .none
       
     case .didTapFilter:
@@ -86,6 +100,9 @@ public struct RecipeListFeature: Sendable {
         )
       )
       return .none
+     
+    case .destination(.presented(.filterOptions(.didTapConfirm))):
+      return updateStatus(state: &state)
       
     case .destination:
       return .none
@@ -94,11 +111,33 @@ public struct RecipeListFeature: Sendable {
       state.destination = .detail(RecipeDetailFeature.State(recipe: recipe))
       return .none
       
+    case .didTapClearFilters:
+      state.$filters.withLock {
+        $0.difficulty = .all
+        $0.rating = .all
+      }
+      
+      return updateStatus(state: &state)
     }
   }
   
-  private func fetchRecipes() -> Effect<Action> {
+  private func updateStatus(state: inout State) -> Effect<Action> {
+    guard !state.recipes.isEmpty else {
+      state.status = .empty("No recipes found")
+      return .none
+    }
     
+    if state.filteredRecipes.isEmpty {
+      state.status = .emptyByFilters("No recipes found matching your filters")
+    } else {
+      state.status = .loaded
+    }
+    
+    return .none
+  }
+  
+  private func fetchRecipes(state: inout State) -> Effect<Action> {
+    state.status = .loading
     return .run { send in
       do {
         await send(.recipesUdpated(try await restAPIClient.fetchAllRecipes()))

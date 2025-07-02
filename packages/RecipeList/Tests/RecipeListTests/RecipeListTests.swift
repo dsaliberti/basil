@@ -16,9 +16,12 @@ struct RecipeListTests {
       $0.restAPIClient.fetchAllRecipes = { .mock }
     }
     
-    await store.send(.task)
+    await store.send(.task) {
+      $0.status = .loading
+    }
     
     await store.receive(\.recipesUdpated) {
+      $0.status = .loaded
       $0.recipes = .mock
     }
   }
@@ -31,10 +34,12 @@ struct RecipeListTests {
       $0.restAPIClient.fetchAllRecipes = { throw RestAPIError.failedToFetch }
     }
     
-    await store.send(.task)
+    await store.send(.task) {
+      $0.status = .loading
+    }
     
     await store.receive(\.recipesLoadFailed) {
-      $0.errorMessage = "Failed to load recipes.\nPlease try again later."
+      $0.status = .failure("Failed to load recipes.\nPlease try again later.")
     }
   }
   
@@ -44,8 +49,13 @@ struct RecipeListTests {
       reducer: { RecipeListFeature() }
     )
     
-    await store.send(.task)
-    await store.receive(\.recipesUdpated)
+    await store.send(.task) {
+      $0.status = .loading
+    }
+    
+    await store.receive(\.recipesUdpated) {
+      $0.status = .empty("No recipes found")
+    }
   }
   
   @Test func didTapRow_navigateToRecipeDetail() async throws {
@@ -84,10 +94,13 @@ struct RecipeListTests {
       $0.restAPIClient.fetchAllRecipes = { .mockToFilter }
     }
     
-    await store.send(.task)
+    await store.send(.task) {
+      $0.status = .loading
+    }
     
     await store.receive( \.recipesUdpated) {
       $0.recipes = .mockToFilter
+      $0.status = .loaded
       
       #expect( Set($0.filteredRecipes.map(\.difficulty)) == [.medium]  )
       
@@ -103,10 +116,46 @@ struct RecipeListTests {
       $0.restAPIClient.fetchAllRecipes = { .mock }
     }
     
-    await store.send(.didPullToRefresh)
+    await store.send(.didPullToRefresh) {
+      $0.status = .loading
+    }
     
     await store.receive(\.recipesUdpated) {
       $0.recipes = .mock
+      $0.status = .loaded
+    }
+  }
+  
+  @Test func emptyByFilters_didTapClearAllFilters_shouldResetFiltersAndStatusLoaded() async throws {
+    
+    @Shared(.inMemory("filters")) var filters: FilterOptions = FilterOptions(
+      difficulty: .medium,
+      rating: .fourPlus
+    )
+    
+    let store = await TestStoreOf<RecipeListFeature>(
+      initialState: RecipeListFeature.State(),
+      reducer: { RecipeListFeature() }
+    ) {
+      $0.restAPIClient.fetchAllRecipes = { .mock }
+    }
+    
+    await store.send(.task) {
+      $0.status = .loading
+    }
+    
+    await store.receive(\.recipesUdpated) {
+      $0.recipes = .mock
+      $0.status = .emptyByFilters("No recipes found matching your filters")
+    }
+    
+    await store.send(.didTapClearFilters) {
+      $0.$filters.withLock {
+        $0.difficulty = .all
+        $0.rating = .all
+      }
+      
+      $0.status = .loaded
     }
   }
 }

@@ -19,20 +19,15 @@ public struct RecipeListView: View {
       VStack {
         Section {
           
-          if store.recipes.isEmpty {
-            if let errorMessage = store.errorMessage {
-              ScrollView {
-                ContentUnavailableView(
-                  errorMessage,
-                  systemImage: "icloud.slash"
-                )
-                .foregroundStyle(.gray)
-              }
-              .refreshable {
-                store.send(.didPullToRefresh)
-              }
+          switch store.status {
+          case .initial, .loading:
+            ScrollView {
+              ProgressView()
+                .padding()
+                .frame(maxWidth: .infinity)
+                .frame(height: 100)
             }
-          } else {
+          case .loaded:
             List(store.filteredRecipes, id: \.id) { recipe in
               Button {
                 store.send(.didTapRow(recipe))
@@ -40,7 +35,29 @@ public struct RecipeListView: View {
                 RecipeRowView(recipe: recipe)
               }
               .buttonStyle(PlainButtonStyle())
+            }
+            
+          case let .failure(message),
+            let .empty(message),
+            let .emptyByFilters(message):
+            ScrollView {
+              ContentUnavailableView(
+                message,
+                systemImage: "icloud.slash"
+              )
+              .foregroundStyle(.gray)
               
+              if case .emptyByFilters = store.status {
+                Button {
+                  store.send(.didTapClearFilters)
+                } label: {
+                  Text("Clear filters")
+                }
+                .buttonStyle(BorderedButtonStyle())
+              }
+            }
+            .refreshable {
+              store.send(.didPullToRefresh)
             }
           }
         }
@@ -82,11 +99,115 @@ public struct RecipeListView: View {
   }
 }
 
-#Preview {
+#Preview("Loaded List") {
   RecipeListView(
     store: StoreOf<RecipeListFeature>(
       initialState: RecipeListFeature.State(),
+      reducer: {
+        RecipeListFeature()
+      }
+    )
+  )
+}
+
+#Preview("Empty List") {
+  RecipeListView(
+    store: StoreOf<RecipeListFeature>(
+      initialState: RecipeListFeature.State(
+        status: .empty("No recipes found")
+      ),
       reducer: { RecipeListFeature() }
+    )
+  )
+}
+
+#Preview("Empty by filters") {
+  
+  @Shared(.inMemory("filters")) var filters: FilterOptions = FilterOptions(difficulty: .hard)
+  
+  RecipeListView(
+    store: StoreOf<RecipeListFeature>(
+      initialState: RecipeListFeature.State(
+        
+      ),
+      reducer: { RecipeListFeature() }
+    )
+  )
+}
+
+
+#Preview("Failure loading List") {
+  RecipeListView(
+    store: StoreOf<RecipeListFeature>(
+      initialState: RecipeListFeature.State(
+        status: .failure("Failed to load recipes.\nPlease try again later.")
+      ),
+      reducer: { RecipeListFeature() }
+    )
+  )
+}
+
+#Preview("Loading") {
+  RecipeListView(
+    store: StoreOf<RecipeListFeature>(
+      initialState: RecipeListFeature.State(
+        status: .loading
+      ),
+      reducer: { RecipeListFeature() }
+    )
+  )
+}
+
+#Preview("Loading, then loaded") {
+  RecipeListView(
+    store: StoreOf<RecipeListFeature>(
+      initialState: RecipeListFeature.State(),
+      reducer: {
+        RecipeListFeature()
+          .dependency(
+            \.restAPIClient.fetchAllRecipes, {
+              try? await Task.sleep(for: .seconds(3))
+              
+              return .mock
+            }
+          )
+      }
+    )
+  )
+}
+
+#Preview("Loading, then failure") {
+  RecipeListView(
+    store: StoreOf<RecipeListFeature>(
+      initialState: RecipeListFeature.State(),
+      reducer: {
+        RecipeListFeature()
+          .dependency(
+            \.restAPIClient.fetchAllRecipes, {
+              try? await Task.sleep(for: .seconds(3))
+              
+              throw RestAPIError.failedToFetch
+            }
+          )
+      }
+    )
+  )
+}
+
+#Preview("Loading, then empty") {
+  RecipeListView(
+    store: StoreOf<RecipeListFeature>(
+      initialState: RecipeListFeature.State(),
+      reducer: {
+        RecipeListFeature()
+          .dependency(
+            \.restAPIClient.fetchAllRecipes, {
+              try? await Task.sleep(for: .seconds(3))
+              
+              return []
+            }
+          )
+      }
     )
   )
 }
