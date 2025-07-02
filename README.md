@@ -18,6 +18,8 @@ Some improvements which could be considered for the future of Basil app:
 
 - add SnapshotTesting so that the Views can be recorded and any further change would be detected, as well as increases the test coverage.
 
+- `RestAPIClient` (liveValue): an important improvement here would be to have another Dependency called `NetworkingClient` which could have 2 main methods: `makeRequest` with parameters which could abstract parts of the Rest requests, such as: header, body, path, method, etc, and another method called `data(from: request URLRequest)` isolating URLSession.shared. Then finally the current RestAPIClient (liveValue) would consume it from the `fetchAllRecipes` as well as any other future methods.
+
 ## 3rd party Dependencies
 - [TCA (The Composable Architecture)](https://github.com/pointfreeco/swift-composable-architecture): "... a library for building applications in a consistent and understandable way, with composition, testing, and ergonomics in mind."
 
