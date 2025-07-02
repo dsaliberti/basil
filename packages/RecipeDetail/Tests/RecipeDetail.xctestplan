@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "E76E49AF-5FC9-481F-8908-C9B3C55CB099",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "RecipeDetailTests",
+        "name" : "RecipeDetailTests"
+      }
+    }
+  ],
+  "version" : 1
+}

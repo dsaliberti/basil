@@ -19,7 +19,9 @@ as well as the view and reducer of the `FilterOptions`.
 Some promissing improvements which could be considered for the future of Basil app:
 - dynamic filters: the filters options could be populated as the loaded properties are present. E.g if only one recipe is loaded with its difficulty as 'hard', then the filter options for difficulty should only show the option 'hard'. That would require to chain the filter options as the above ones would also filter the below ones.
 
-- tag cloud on `RecipeDetailView`: at the bottom of the RecipeDetaiView there's an horizontal scrollview to display its tags. The ideal would be to display them as a tag cloud where it displays like 'masonry' (an old scholl web js library) where the tags appear as in a HStack but when the horizontal limit is reached, another 'row' is dynamically added, until all tags are displayed.
+- tag cloud on `RecipeDetailView`: at the bottom of the RecipeDetaiView there's an horizontal scrollview to display its tags. The ideal would be to display them as a tag cloud where it displays like 'masonry' (an old school web js library) where the tags appear as in a HStack but when the horizontal limit is reached, another 'row' is dynamically added, until all tags are displayed.
+
+- add SnapshotTesting so that the Views can be recorded and any firther change would be detected, as well as increses the test coverage.
 
 ## 3rd party Dependencies
 
@@ -41,11 +43,11 @@ On failure or empty results, there's a pull-to-refresh so that users can retry c
 There are Previews in every view. `RecipeDetailView` and `FilterOptionsView` are previewed as they're presented in the list. The `RecipeListView` has all static states as well as the main states transitions in the previews with names. 
 
 ### Unit Tests
-Mainly (only) the `RecipeList` module has UnitTests. For the list itself and the filters options.
+Mainly the `RecipeList` module has UnitTests. For the list itself and the filters options.
 The tests cover every Action (inputs) which could be called in the reducer and its possible variations.
 To run the Tests:
 
-- Select the Scheme `RecipeList` and hit Cmd+U to run all, or on the Test Navigator (Cmd+6) run them individually  
+- Select the Scheme `RecipeList` or `RecipeDetail` and hit Cmd+U to run all, or on the Test Navigator (Cmd+6) run each test individually.  
 
 Enjoy 😉
 

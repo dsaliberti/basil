@@ -10,13 +10,15 @@ public struct RecipeDetailFeature: Sendable {
   public struct State: Equatable {
     let recipe: Recipe
     
+    @Shared(.inMemory("favorites")) var favorites: Set<Recipe.ID> = []
+    
     public init(recipe: Recipe) {
       self.recipe = recipe
     }
   }
   
   public enum Action {
-    case didTapDismiss
+    case didTapFavorite(Recipe.ID)
   }
   
   public var body: some Reducer<State, Action> {
@@ -26,11 +28,14 @@ public struct RecipeDetailFeature: Sendable {
   func core(state: inout State, action: Action) -> Effect<Action> {
     switch action {
       
-    case .didTapDismiss:
-      @Dependency(\.dismiss) var dismiss
-      return .run { _ in
-        await dismiss()
+    case let .didTapFavorite(id):
+      if state.favorites.contains(id) {
+        let _ = state.$favorites.withLock { $0.remove(id) }
+      } else {
+        let _ = state.$favorites.withLock { $0.insert(id) }
       }
+      
+      return .none
     }
   }
 }

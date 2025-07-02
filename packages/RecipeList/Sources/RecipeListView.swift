@@ -8,8 +8,6 @@ public struct RecipeListView: View {
   
   @Bindable var store: StoreOf<RecipeListFeature>
   
-  @Namespace var animation
-  
   public init(store: StoreOf<RecipeListFeature>) {
     self.store = store
   }
@@ -33,6 +31,15 @@ public struct RecipeListView: View {
                 store.send(.didTapRow(recipe))
               } label: {
                 RecipeRowView(recipe: recipe)
+                  .overlay(alignment: .trailing) {
+                    if store.favorites.contains(recipe.id) {
+                      Image(systemName: "star.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 25)
+                        .foregroundStyle(.yellow)
+                    }
+                  }
               }
               .buttonStyle(PlainButtonStyle())
             }

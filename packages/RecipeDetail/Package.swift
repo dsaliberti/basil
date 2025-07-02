@@ -23,7 +23,13 @@ let package = Package(
       dependencies: [
         "Core"
       ]
-    )
+    ),
+    .testTarget(
+      name: "RecipeDetailTests",
+      dependencies: [
+        "RecipeDetail"
+      ]
+    ),
   ]
 )
 

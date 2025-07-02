@@ -38,13 +38,15 @@ public struct RecipeListFeature: Sendable {
     
     @Shared(.inMemory("filters")) var filters: FilterOptions = FilterOptions()
     
+    @Shared(.inMemory("favorites")) var favorites: Set<Recipe.ID> = []
+    
     var filteredRecipes: [Recipe] {
-        recipes.filter {
-          let difficulty = filters.difficulty == .all || $0.difficulty == filters.difficulty
-          let rating = filters.rating == .all || $0.rating >= filters.rating.rawValue
-          
-          return difficulty && rating
-        }
+      recipes.filter {
+        let difficulty = filters.difficulty == .all || $0.difficulty == filters.difficulty
+        let rating = filters.rating == .all || $0.rating >= filters.rating.rawValue
+        
+        return difficulty && rating
+      }
     }
     
     public init(
@@ -100,7 +102,7 @@ public struct RecipeListFeature: Sendable {
         )
       )
       return .none
-     
+      
     case .destination(.presented(.filterOptions(.didTapConfirm))):
       return updateStatus(state: &state)
       

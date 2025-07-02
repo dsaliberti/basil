@@ -23,14 +23,17 @@ struct RecipeRowView: View {
         .clipShape(RoundedRectangle(cornerRadius: 8))
       
       VStack(alignment: .leading, spacing: 4) {
-        Text(recipe.name)
-          .font(.headline)
-        
-        Text("difficulty: **\(recipe.difficulty.rawValue)**")
-          .font(.subheadline)
-        
-        Text("rating: **\(recipe.rating, format: .number)**")
-          .font(.subheadline)
+        Group {
+          Text(recipe.name)
+            .font(.headline)
+          
+          Text("difficulty: **\(recipe.difficulty.rawValue)**")
+            .font(.subheadline)
+          
+          Text("rating: **\(recipe.rating, format: .number)**")
+            .font(.subheadline)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
       }
     }
   }
