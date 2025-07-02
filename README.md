@@ -46,16 +46,6 @@ _Caveat_: For production purposes I'd consider the persistence for the `Shared` 
 Enjoy  
 
 author: Danilo Soares Aliberti
+
 dsaliberti
 
-
-
-// x kill contentView
-// models: domain vs dto
-// x consolidate mocks
-// x list view: functions separate cases
-// failure: retry button as well 
-// x emptyByFilters: noResults / emptyResults
-
-// detail: put back views in main view
-// tests:  
