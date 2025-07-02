@@ -1,11 +1,6 @@
 import SharedModels
 import ComposableArchitecture
 
-public struct FilterOptions: Sendable, Equatable {
-  public var difficulty: Difficulty = .all
-  public var rating: Rating = .all
-}
-
 @Reducer
 public struct FilterOptionsFeature: Sendable {
   
@@ -20,7 +15,7 @@ public struct FilterOptionsFeature: Sendable {
     
     public var selectedRating: Rating
     
-    @Shared(.inMemory("filters")) var filters: FilterOptions = FilterOptions()
+    @Shared(.selectedFilters) var filters: FilterOptions = FilterOptions()
     
     public init(
       selectedDifficulty: Difficulty = .all,

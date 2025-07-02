@@ -4,8 +4,8 @@ A fresh iOS app made with Swift, SwiftUI, TCA and 💚
 
 Basil app fetches recipes from the DummyJson API and shows them in beautiful screens. 
 
-The main app target only instantiates the RecipeList in the ContentView.
-Everything is separated on modules
+The main app target only instantiates the `RecipeList` at the App level.
+Everything is separated on modules.
 
 ## Modules
 
@@ -49,7 +49,11 @@ To run the Tests:
 
 - Select the Scheme `RecipeList` or `RecipeDetail` and hit Cmd+U to run all, or on the Test Navigator (Cmd+6) run each test individually.  
 
+Caveat: For production purposes I'd consider the persistence for the `Shared` key `favoriteRecipeIds` should no longer be `inMemory` but a proper database using GRDB with SQLite.
+
 Enjoy 😉
 
 author: Danilo Soares Aliberti
 dsaliberti
+
+

@@ -31,16 +31,17 @@ public struct RecipeListFeature: Sendable {
       case loaded
       case failure(String)
       case empty(String)
-      case emptyByFilters(String)
+      case emptyFiltersResult(String)
     }
     
     @Presents var destination: Destination.State?
     
-    @Shared(.inMemory("filters")) var filters: FilterOptions = FilterOptions()
+    @Shared(.selectedFilters) var filters: FilterOptions = FilterOptions()
     
-    @Shared(.inMemory("favorites")) var favorites: Set<Recipe.ID> = []
+    @Shared(.favoriteRecipeIds) var favorites: Set<Recipe.ID> = []
     
     var filteredRecipes: [Recipe] {
+      
       recipes.filter {
         let difficulty = filters.difficulty == .all || $0.difficulty == filters.difficulty
         let rating = filters.rating == .all || $0.rating >= filters.rating.rawValue
@@ -130,7 +131,7 @@ public struct RecipeListFeature: Sendable {
     }
     
     if state.filteredRecipes.isEmpty {
-      state.status = .emptyByFilters("No recipes found matching your filters")
+      state.status = .emptyFiltersResult("No recipes found matching your filters")
     } else {
       state.status = .loaded
     }
@@ -143,9 +144,7 @@ public struct RecipeListFeature: Sendable {
     return .run { send in
       do {
         await send(.recipesUdpated(try await restAPIClient.fetchAllRecipes()))
-        
       } catch {
-        print(error)
         await send(.recipesLoadFailed)
       }
     }

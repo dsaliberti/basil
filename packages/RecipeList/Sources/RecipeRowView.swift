@@ -15,10 +15,6 @@ struct RecipeRowView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.black.opacity(0.1))
         }
-        .onFailure { error in
-          print(error)
-        }
-        .cacheMemoryOnly(true)
         .frame(width: 90, height: 90)
         .clipShape(RoundedRectangle(cornerRadius: 8))
       

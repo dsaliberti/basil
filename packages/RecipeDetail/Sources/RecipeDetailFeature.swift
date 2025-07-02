@@ -1,3 +1,4 @@
+import Core
 import SharedModels
 import ComposableArchitecture
 
@@ -10,7 +11,7 @@ public struct RecipeDetailFeature: Sendable {
   public struct State: Equatable {
     let recipe: Recipe
     
-    @Shared(.inMemory("favorites")) var favorites: Set<Recipe.ID> = []
+    @Shared(.favoriteRecipeIds) var favorites: Set<Recipe.ID> = []
     
     public init(recipe: Recipe) {
       self.recipe = recipe

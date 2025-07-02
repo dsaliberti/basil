@@ -23,10 +23,6 @@ public struct RecipeHeaderView: View {
           .frame(maxWidth: .infinity, maxHeight: .infinity)
           .background(.black.opacity(0.1))
       }
-      .onFailure { error in
-        print(error)
-      }
-      .cacheMemoryOnly(true)
       .frame(height: 400)
       .aspectRatio(contentMode: .fill)
       .frame(maxWidth: .infinity)
@@ -47,8 +43,6 @@ public struct RecipeHeaderView: View {
 
 #Preview {
   VStack {
-    
-    
     RecipeHeaderView(
       name: "Recipe Name",
       imageURL: URL(

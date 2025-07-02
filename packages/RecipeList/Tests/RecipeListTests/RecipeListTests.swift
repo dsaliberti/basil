@@ -8,7 +8,7 @@ import ComposableArchitecture
 
 struct RecipeListTests {
   
-  @Test func task_successPopulateResult() async throws {
+  @Test func task_success_populatesResult() async throws {
     let store = await TestStoreOf<RecipeListFeature>(
       initialState: RecipeListFeature.State(),
       reducer: { RecipeListFeature() }
@@ -26,7 +26,7 @@ struct RecipeListTests {
     }
   }
   
-  @Test func task_failureThrowsError() async throws {
+  @Test func task_failure_throwsError() async throws {
     let store = await TestStoreOf<RecipeListFeature>(
       initialState: RecipeListFeature.State(),
       reducer: { RecipeListFeature() }
@@ -58,7 +58,7 @@ struct RecipeListTests {
     }
   }
   
-  @Test func didTapRow_navigateToRecipeDetail() async throws {
+  @Test func didTapRow_navigatesToRecipeDetail() async throws {
     let store = await TestStoreOf<RecipeListFeature>(
       initialState: RecipeListFeature.State(),
       reducer: { RecipeListFeature() }
@@ -69,7 +69,7 @@ struct RecipeListTests {
     }
   }
   
-  @Test func didTapFilter_navigateToFilterOptions() async throws {
+  @Test func didTapFilter_navigatesToFilterOptions() async throws {
     let store = await TestStoreOf<RecipeListFeature>(
       initialState: RecipeListFeature.State(),
       reducer: { RecipeListFeature() }
@@ -82,7 +82,7 @@ struct RecipeListTests {
   
   @Test func filters_shouldFilter_filteredRecipes() async throws {
     
-    @Shared(.inMemory("filters")) var filters: FilterOptions = FilterOptions(
+    @Shared(.selectedFilters) var filters: FilterOptions = FilterOptions(
       difficulty: .medium,
       rating: .fourPlus
     )
@@ -126,9 +126,9 @@ struct RecipeListTests {
     }
   }
   
-  @Test func emptyByFilters_didTapClearAllFilters_shouldResetFiltersAndStatusLoaded() async throws {
+  @Test func emptyFiltersResult_didTapClearAllFilters_shouldResetFiltersAndStatusLoaded() async throws {
     
-    @Shared(.inMemory("filters")) var filters: FilterOptions = FilterOptions(
+    @Shared(.selectedFilters) var filters: FilterOptions = FilterOptions(
       difficulty: .medium,
       rating: .fourPlus
     )
@@ -146,7 +146,7 @@ struct RecipeListTests {
     
     await store.receive(\.recipesUdpated) {
       $0.recipes = .mock
-      $0.status = .emptyByFilters("No recipes found matching your filters")
+      $0.status = .emptyFiltersResult("No recipes found matching your filters")
     }
     
     await store.send(.didTapClearFilters) {

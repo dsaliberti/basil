@@ -1,6 +1,7 @@
 import Core
 import SwiftUI
 import Kingfisher
+import SharedModels
 import RecipeDetail
 import ComposableArchitecture
 
@@ -13,65 +14,26 @@ public struct RecipeListView: View {
   }
   
   public var body: some View {
+    
     NavigationStack {
       VStack {
         Section {
-          
           switch store.status {
           case .initial, .loading:
-            ScrollView {
-              ProgressView()
-                .padding()
-                .frame(maxWidth: .infinity)
-                .frame(height: 100)
-            }
+            progressView
+            
           case .loaded:
-            List(store.filteredRecipes, id: \.id) { recipe in
-              Button {
-                store.send(.didTapRow(recipe))
-              } label: {
-                RecipeRowView(recipe: recipe)
-                  .overlay(alignment: .trailing) {
-                    if store.favorites.contains(recipe.id) {
-                      Image(systemName: "star.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 25)
-                        .foregroundStyle(.yellow)
-                    }
-                  }
-              }
-              .buttonStyle(PlainButtonStyle())
-            }
+            recipesList
             
           case let .failure(message),
             let .empty(message),
-            let .emptyByFilters(message):
-            ScrollView {
-              ContentUnavailableView(
-                message,
-                systemImage: "icloud.slash"
-              )
-              .foregroundStyle(.gray)
-              
-              if case .emptyByFilters = store.status {
-                Button {
-                  store.send(.didTapClearFilters)
-                } label: {
-                  Text("Clear filters")
-                }
-                .buttonStyle(BorderedButtonStyle())
-              }
-            }
-            .refreshable {
-              store.send(.didPullToRefresh)
-            }
+            let .emptyFiltersResult(message):
+            unavailableView(message)
           }
         }
       }
-      .navigationTitle(Text(store.title))
+      .navigationTitle(store.title)
       .toolbar {
-        
         if !store.recipes.isEmpty {
           ToolbarItem(placement: .topBarTrailing) {
             Button {
@@ -104,6 +66,57 @@ public struct RecipeListView: View {
       await store.send(.task).finish()
     }
   }
+  
+  private var recipesList: some View {
+    List(store.filteredRecipes) { recipe in
+      Button {
+        store.send(.didTapRow(recipe))
+      } label: {
+        RecipeRowView(recipe: recipe)
+          .overlay(alignment: .trailing) {
+            if store.favorites.contains(recipe.id) {
+              Image(systemName: "star.fill")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 25)
+                .foregroundStyle(.yellow)
+            }
+          }
+      }
+      .foregroundStyle(.primary)
+    }
+  }
+  
+  private func unavailableView(_ message: String) -> some View {
+    ScrollView {
+      ContentUnavailableView(
+        message,
+        systemImage: "icloud.slash"
+      )
+      .foregroundStyle(.gray)
+      
+      if case .emptyFiltersResult = store.status {
+        Button {
+          store.send(.didTapClearFilters)
+        } label: {
+          Text("Clear filters")
+        }
+        .buttonStyle(BorderedButtonStyle())
+      }
+    }
+    .refreshable {
+      store.send(.didPullToRefresh)
+    }
+  }
+  
+  private var progressView: some View {
+    ScrollView {
+      ProgressView()
+        .padding()
+        .frame(maxWidth: .infinity)
+        .frame(height: 100)
+    }
+  }
 }
 
 #Preview("Loaded List") {
@@ -130,7 +143,7 @@ public struct RecipeListView: View {
 
 #Preview("Empty by filters") {
   
-  @Shared(.inMemory("filters")) var filters: FilterOptions = FilterOptions(difficulty: .hard)
+  @Shared(.selectedFilters) var filters: FilterOptions = FilterOptions(difficulty: .hard)
   
   RecipeListView(
     store: StoreOf<RecipeListFeature>(

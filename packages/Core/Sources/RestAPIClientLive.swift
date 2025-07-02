@@ -23,7 +23,6 @@ extension RestAPIClient: DependencyKey {
           return recipes.recipes
           
         } catch {
-          print("~>", error.localizedDescription)
           throw error
         }
       }

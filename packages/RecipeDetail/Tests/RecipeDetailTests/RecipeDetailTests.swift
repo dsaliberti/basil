@@ -9,7 +9,7 @@ struct RecipeDetailTests {
   
   @Test func didFavorite_shouldToggleFavorite() async throws {
     
-    @Shared(.inMemory("favorites")) var favorites: Set<Recipe.ID> = []
+    @Shared(.favoriteRecipeIds) var favorites: Set<Recipe.ID> = []
     
     let store = await TestStoreOf<RecipeDetailFeature>(
       initialState: RecipeDetailFeature.State(recipe: .mock),
