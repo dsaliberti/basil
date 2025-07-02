@@ -27,11 +27,13 @@ Some improvements which could be considered for the future of Basil app:
 - Checkout the repo, tap 'Trust' on the security dialog.
 - Open the `Basil.xcodeproj` and keep an eye on the dependencies finish to load/checkout (turning greyed out to white).
 - Trust all Macros errors and warnings.
-- Run (Cmd+R)
+- Run (Cmd+R) 🚀
  
 ## Tests
 It's been tested on simulators iPhone 16 Pro and iPhone SE (3rd generation) all with iOS 18.4.It supports Light and Dark Appearances out of the box.
+
 On failure or empty results, there's a pull-to-refresh so that users can retry conveniently. 
+
 There are Previews in every view. `RecipeDetailView` and `FilterOptionsView` are previewed as they're presented in the list. The `RecipeListView` has all static states as well as the main states transitions in the previews with names.
  
 ### Unit Tests
@@ -41,9 +43,9 @@ The tests cover every Action (inputs) which could be called in the reducer and i
 To run the Tests:
 - Select the Scheme `RecipeList` or `RecipeDetail` and hit Cmd+U to run all, or on the Test Navigator (Cmd+6) run each test individually.  
 
-_Caveat_: For production purposes I'd consider the persistence for the `Shared` key `favoriteRecipeIds` should no longer be `inMemory` but a proper database using GRDB with SQLite: .
+📌 _Caveat_: For production purposes I'd consider the persistence for the `Shared` key `favoriteRecipeIds` should no longer be `inMemory` but a proper database using GRDB with SQLite.
 
-Enjoy  
+Enjoy 🍲🍴
 
 author: Danilo Soares Aliberti
 
