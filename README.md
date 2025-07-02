@@ -1,4 +1,5 @@
-# Basil 🌿
+# Basil app ![Basil-logo](https://github.com/user-attachments/assets/7c68233b-d6f1-438e-91f8-d68159fa4028)
+
 A fresh iOS app made with Swift, SwiftUI, TCA and 💚
 
 Basil app fetches recipes from the DummyJson API and shows them in beautiful screens. 
