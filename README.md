@@ -41,9 +41,7 @@ Mainly the `RecipeList` module has UnitTests. For the list itself and the filter
 The tests cover every Action (inputs) which could be called in the reducer and its possible variations.
 
 To run the Tests:
-- Select the Scheme `RecipeList` or `RecipeDetail` and hit Cmd+U to run all, or on the Test Navigator (Cmd+6) run each test individually.  
-
-📌 _Caveat_: For production purposes I'd consider the persistence for the `Shared` key `favoriteRecipeIds` should no longer be `inMemory` but a proper database using GRDB with SQLite.
+- Select the Scheme `RecipeList` or `RecipeDetail` and hit Cmd+U to run all, or on the Test Navigator (Cmd+6) run each test individually.
 
 Enjoy 🍲🍴
 
